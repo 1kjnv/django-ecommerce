@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+<title>{% block title %}Contact{% endblock %}</title>
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- animate CSS -->
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+<!-- icon CSS -->
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+<!-- magnific popup CSS -->
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<!-- style CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+<!-- breadcrumb part start-->
+<div class="row justify-content-center" style="margin-bottom: 20px;">
+    <h2>Contact us</h2>
+</div>
+<!-- breadcrumb part end-->
+
+<!--================ product create Area =================-->
+<section class="login_part section_padding ">
+    <div class="container">
+        <div class="row justify-content-center" style="border: 2px solid green;">
+            <div class="col-lg-6 col-md-2">
+                <div class="login_part_form">
+                    <div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="row justify-content-center" style="margin-bottom: 20px;">
+                            <h3>Contact Us!</h3>
+                        </div>
+                        <form class="row contact_form" enctype="multipart/form-data" method="post">
+                            {% csrf_token %}
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Name">
+                            </div>
+                            
+                            <div class="col-md-12 form-group p_star">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                            </div>
+                            
+                            <div class="col-md-12 form-group p_star">
+                                <select class="custom-select" id="inputGroupSelect01" name="subject">
+                                    <option selected>Select subject ...</option>
+                                    <option value="CUstomer Service">Customer Service</option>
+                                    <option value="Product Support">Product Support</option>
+                                    <option value="Problems">Problems about Products</option>
+                                    <option value="Need help">Need help</option>
+                                </select>
+                            </div>
+                            
+                            
+                            <div class="col-md-12 form-group p_star">
+                                <input type="text"  class="form-control" id="message" name="message" placeholder="Message" required>
+                            </div>
+
+                            <div class="col-md-12 form-group row justify-content-center">
+                                <button type="submit" class="btn_3">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ product create end =================-->
+
+{% endblock %}

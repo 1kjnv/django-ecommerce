@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="row justify-content-center" style="margin-bottom: 20px;">
+    <h2>Update Profile</h2>
+</div>
+
+<!--================ product create Area =================-->
+<section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+	<div class="container">
+		<div class="row justify-content-center" style="border: 2px solid green;">
+			<div class="col-lg-6 col-md-2">
+				<div class="login_part_form">
+					<div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="row justify-content-center" style="margin-bottom: 20px;">
+                            <h3>Enter credentials!</h3>
+                        </div>
+						<form class="row contact_form" enctype="multipart/form-data" method="post">
+							{% csrf_token %}
+							<div class="col-md-12 form-group p_star">
+								
+								{% for hidden in form.hidden_fields %}
+								{{ hidden }}
+								{% endfor %}
+	
+								<div class="form-group">
+									<label for="{{ field.id_for_label }}">{{ field.label }}</label>
+									{% render_field form.first_name class="form-control" %}
+									
+									{% render_field form.last_name class="form-control" %}
+									{% render_field form.email class="form-control" %}
+									{% for error in field.errors %}
+									<span class="help-block">{{ error }}</span>
+									{% endfor %}
+								</div>
+							</div>			
+
+							<div class="col-md-12 form-group row justify-content-center">
+								<button type="submit" class="btn_3">Submit</button>
+                                <a href="{% url 'change_password' %}">Change Password</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================ product create end =================-->
+{% endblock %}

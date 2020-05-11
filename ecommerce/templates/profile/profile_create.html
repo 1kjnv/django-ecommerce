@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+<title>{% block title %}Register{% endblock %}</title>
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- animate CSS -->
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+<!-- icon CSS -->
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+<!-- magnific popup CSS -->
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<!-- style CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
+{% block content %}
+
+
+
+    <!-- breadcrumb part start-->
+    <div class="row justify-content-center">
+        <h2>Register</h2>
+    </div>
+    <!-- breadcrumb part end-->
+
+
+    <!--================register_part Area =================-->
+    <section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+        <div class="container">
+            <div class="row justify-content-center" style="border: 2px solid green;">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                            <div class="row justify-content-center" style="margin-bottom: 20px;">
+                                <h3>Welcome!</h3>
+                            </div>
+                            <div class="row justify-content-center">
+                                {% if error %}
+                                    <p class="italic" style="color: red;">{{error}}</p>
+                                {% endif %}
+                            </div>
+                            <form class="row contact_form" action="{% url 'register' %}" method="post">
+                                {% csrf_token %}
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name">
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name">
+                                </div>
+                                
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" minlength="8" id="password1" name="password1" placeholder="Password">
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="password" class="form-control" minlength="8" id="password2" name="password2" placeholder="Password Confirmation">
+                                </div>
+
+                                <div class="col-md-12 form-group row justify-content-center">
+                                    <button type="submit" class="btn_3">register</button>
+                                    <a href="{% url 'login' %}">Login</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================register_part end =================-->
+
+
+
+
+
+
+    <!--
+    <div class="row justify-content-center mt-5">
+        <div class="col-5 mt-5">
+            <form action="{% url 'register' %}" class="form-signin" method="POST">
+                {% csrf_token %}
+                
+                <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+
+                <label for="username" class="sr-only mb-2">Username</label>
+                <input type="text" id="username" class="form-control mb-2" placeholder="Username" required autofocus name="username">
+
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" id="email" class="form-control mb-2" placeholder="Email" required name="email">
+
+                <label for="password1" class="sr-only">Password</label>
+                <input type="password" id="password1" class="form-control" placeholder="Password" required name="password1">
+
+                <label for="password2" class="sr-only">Password Confirmation</label>
+                <input type="password" id="password2" class="form-control" placeholder="Password Confirmation" required name="password2">
+
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    -->
+{% endblock %}

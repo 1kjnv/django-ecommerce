@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+<title>{% block title %}Create Product{% endblock %}</title>
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- animate CSS -->
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+<!-- icon CSS -->
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+<!-- magnific popup CSS -->
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<!-- style CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+<!-- breadcrumb part start-->
+<div class="row justify-content-center" style="margin-bottom: 20px;">
+	<h2>Product Create</h2>
+</div>
+<!-- breadcrumb part end-->
+
+<!--================ product create Area =================-->
+<section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+	<div class="container">
+		<div class="row justify-content-center" style="border: 2px solid green;">
+			<div class="col-lg-6 col-md-2">
+				<div class="login_part_form">
+					<div class="login_part_form_iner" style="margin-bottom: 20px; margin-top: 20px;">
+						<div class="row justify-content-center" style="margin-bottom: 20px;">
+							<h3>New product! <br>
+								Enter product details</h3>
+						</div>
+						<form class="row contact_form" enctype="multipart/form-data" method="post">
+							{% csrf_token %}
+							<div class="col-md-12 form-group p_star">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Name">
+							</div>
+							<div class="col-md-12 form-group p_star">
+								<input type="text" class="form-control" id="price" name="price" placeholder="Price">
+							</div>
+
+							<div class="col-md-12 form-group p_star">
+								<input type="text" class="form-control" id="description" name="description"
+									placeholder="Description">
+							</div>
+
+							<div class="col-md-12 form-group p_star">
+								<select class="custom-select" id="inputGroupSelect01" name="color">
+									<option selected>Select color ...</option>
+									<option value="Black">Black</option>
+									<option value="Blue">Blue</option>
+									<option value="Red">Red</option>
+									<option value="Yellow">Yellow</option>
+									<option value="Brown">Brown</option>
+									<option value="Silver">Silver</option>
+									<option value="Purple">Purple</option>
+									<option value="Grey">Grey</option>
+									<option value="White">White</option>
+								</select>
+							</div>
+
+							<div class="col-md-12 form-group p_star">
+								<select class="custom-select" id="inputGroupSelect01" name="category">
+									<option selected>Select category ...</option>
+									<option value="Electronics">Electronics</option>
+									<option value="Shoes">Shoes</option>
+									<option value="Men Clothes">Men Clothes</option>
+									<option value="Women Clothes">Women Clothes</option>
+									<option value="HouseHold">HouseHold</option>
+									<option value="Books">Books</option>
+									<option value="Grocery">Grocery</option>
+									<option value="Beauty">Beauty</option>
+								</select>
+							</div>
+
+							<div class="col-md-12 form-group p_star">
+								<input type="file" class="form-control" id="image" name="image" required>
+							</div>
+
+							<div class="col-md-12 form-group p_star">
+								<input type="number" class="form-control" id="quantity" name="quantity"
+									placeholder="Quantity" required>
+							</div>
+
+							<div class="col-md-12 form-group row justify-content-center">
+								<button type="submit" class="btn_3">
+									create
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================ product create end =================-->
+
+<!--
+	<h3>Product Create</h3>
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<label for="name">Name</label>
+		<input type="text" id="name" name="name" required>
+		
+		<label for="price">Price</label>
+		<input type="text" id="price" name="price" required>
+		
+		<label for="description">Description</label>
+		<input type="text" id="description" name="description" required>
+		
+		<label for="Color"></label>
+		<select name="color" id="Color">
+			<option>Choose...</option>
+			<option>Black</option>
+			<option>White</option>
+			<option>Blue</option>
+			<option>Brown</option>
+			<option>Yellow</option>
+		</select>
+		
+		<label for="category">Category</label>
+		<select name="category" id="category">
+			<option>Choose...</option>
+			<option>Smartphone</option>
+			<option>Shoes</option>
+			<option>Electronics</option>
+			<option>Clothes</option>
+			<option>Home Suppliences</option>
+		</select>
+	
+		<label for="image">Image</label>
+		<input type="file" id="image" name="image" required>
+
+		<label for="quantity">Quantity</label>
+		<input type="number" id="quantity" name="quantity" required>
+		
+		<button type="submit">Create</button>
+	</form>
+	-->
+
+{% endblock %}

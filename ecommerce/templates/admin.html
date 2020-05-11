@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}Admin - Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="icon" href="/media/images/img/faviconn.png">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{% static 'css/all.css' %}">
+    <!-- icon CSS -->
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <!-- magnific popup CSS -->
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- for load more button -->
+    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/infinite.min.js' %}"></script>
+</head>
+
+<body>
+
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 row justify-content-center">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{% url 'home' %}"> <img src="/media/images/img/logo.png"
+                                alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a href="{% url 'allproducts' %}" class="nav-link dropdown-toggle"
+                                        id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        product
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="{% url 'admindashboard' %}">Product List</a>
+                                        <a class="dropdown-item" href="{% url 'productcreate' %}">Create Product</a>
+                                        <a class="dropdown-item" href="{% url 'admindashboard' %}">Update Product</a>
+                                        <a class="dropdown-item" href="{% url 'admindashboard' %}">Delete Product</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'userlist' %}">Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'orders' %}">Orders</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-3 product_sidebar collapse" id="collapseSearch">
+                    <div class="single_sedebar">
+                        <form action="{% url 'allproducts' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="text" name="search" placeholder="Search for product">
+                            <i class="fas fa-search"></i>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+
+
+    {% block content %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-8" style="border: 2px solid green; padding-left: 100px; padding-right: 100px; margin-top: 100px;">
+            <div class="row justify-content-center" style="margin-bottom: 20px;">
+                <h1>Products</h1>
+            </div>
+            <hr>
+            <table class="table">
+                <tr class="row thead-dark">
+                    <th class="col">Number</th>
+                    <th class="col">Name</th>
+                    <th class="col">Price</th>
+                    <th class="col">Quantity</th>
+                    <th class="col">Delete</th>
+                    <th class="col">Edit</th>
+                </tr>
+                {% for product in admindashboard %}
+                <tr class="row thead-light">
+                    <td class="col">{{ forloop.counter }}</td>
+                    <td class="col"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></td>
+                    <td class="col">{{ product.price }}</td>
+                    <td class="col">{{ product.quantity }}</td>
+                    <td class="col">
+                        <a href="{% url 'deleteobject' product.id %}"><i class="fas fa-trash"></i></a>
+                    </td>
+                    <td class="col">
+                        <a href="{% url 'product_update' product.id %}"><i class="fas fa-edit"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                <!-- Pagination -->
+                {% if admindashboard.has_other_pages %}
+                <tr class="row justify-content-center">
+                    <td>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                {% if admindashboard.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ admindashboard.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                                
+                                {% for i in admindashboard.paginator.page_range %}
+                                {% if admindashboard.number == i %}
+                                <li class="page-item active"><a class="page-link" href="#"><span>{{ i }}<span class="sr-only">(current)</span></span></a></li>
+                                {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                {% endif %}
+                                {% endfor %}
+        
+                                {% if admindashboard.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ admindashboard.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </td>
+                </tr>
+                {% endif %}
+                <!-- End of pagination -->
+            </table>
+        </div>
+    </div>
+
+    {% endblock %}
+
+    <!-- jquery plugins here-->
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <!-- popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- magnific popup js -->
+    <script src="js/jquery.magnific-popup.js"></script>
+    <!-- carousel js -->
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.nice-select.min.js"></script>
+    <!-- slick js -->
+    <script src="js/slick.min.js"></script>
+    <script src="js/jquery.counterup.min.js"></script>
+    <script src="js/waypoints.min.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/jquery.form.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <!-- custom js -->
+    <script src="js/custom.js"></script>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+</html>

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<!-- animate CSS -->
+<link rel="stylesheet" href="{% static 'css/animate.css' %}">
+<!-- owl carousel CSS -->
+<link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+<!-- font awesome CSS -->
+<link rel="stylesheet" href="{% static 'css/all.css' %}">
+<!-- icon CSS -->
+<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+<link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+<!-- magnific popup CSS -->
+<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+<!-- style CSS -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block content %}
+
+<section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center" style="border: 2px solid green;">
+            <div class="col-lg-6 col-md-6">
+                <div class="login_part_form">
+                    <div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="row justify-content-center" style="margin-top: 100px;">
+                            <img src="/media/images/payment/check.jpg" alt="check mark" height="200px;" width="200px;" class="img-responsive">
+                        </div>
+                        <div class="row justify-content-center">
+                            <h3>Payment Success!</h3>
+                        </div>
+                        <div class="row justify-content-center" style="margin-bottom: 150px; margin-top: 50px;">
+                            <a href="{% url 'home' %}">Go to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

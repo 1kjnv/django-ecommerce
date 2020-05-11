@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <h2>My Profile</h2>
+</div>
+
+<!--================ profile Area =================-->
+<section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+    <div class="container">
+        <div class="row justify-content-center" style="border: 2px solid green;">
+            <div class="col-lg-6 col-md-2">
+                <div class="login_part_form">
+                    <div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                        <div class="row justify-content-center" style="margin-bottom: 20px;">
+                            <h3>My Profile</h3>
+                        </div>
+                        {% for user in profile_detail %}
+                        <form class="row contact_form" action="{% url 'register' %}" method="post">
+                            {% csrf_token %}
+
+                            <div class="col-md-12 form-group p_star">
+                                <p class="form-control">
+                                    <span>{{ user.first_name }}</span>
+                                    <span>{{ user.last_name }}</span>
+                                </p>
+                            </div>
+
+                            <div class="col-md-12 form-group p_star">
+                                <p class="form-control">{{ user.username }}</p>
+                            </div>
+
+                            <div class="col-md-12 form-group p_star">
+                                <p class="form-control">{{ user.email }}</p>
+                            </div>
+                            <div class="col-md-12 form-group row justify-content-center">
+                                {% for user in profile_detail %}
+                                <a href="{% url 'editprofile' %}" class="btn_3">Update Profile</a>
+                                {% endfor %}
+                            </div>
+                        </form>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ profile end =================-->
+
+{% endblock %}

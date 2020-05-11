@@ -1,0 +1,219 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="eBazar ecommerce">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}eBazar | Payment{% endblock %}</title>
+
+    <!-- stripe js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <style type="text/css">
+        /**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+        .StripeElement {
+            box-sizing: border-box;
+
+            height: 40px;
+
+            padding: 10px 12px;
+
+            border: 1px solid transparent;
+            border-radius: 4px;
+            background-color: white;
+
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+        }
+
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+        .input {
+            margin-top: 10px;
+        }
+        #input {
+            width: 75%;
+            height: 25px;
+        }
+        #card-element {
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #sb {
+            border: 1px solid black;
+            margin-top: 50px;
+        }
+        .nav{
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            padding-right: 50px;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <nav>
+            <ul style="list-style: none; display: flex;">
+                <li class="nav"><a href="{% url 'home' %}">Home</a></li>
+                <li class="nav"><a href="{% url 'allproducts' %}">Shop</a></li>
+                <li class="nav"><a href="{% url 'cart' %}">Cart</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- breadcrumb part start-->
+    <div style="text-align: center;">
+        <h2>Payment</h2>
+    </div>
+    <!-- breadcrumb part end-->
+
+
+
+    <section class="login_part section_padding " style="padding-top: 20px; margin-bottom: 20px;">
+        <div class="container">
+            <div class="row justify-content-center" style="border: 2px solid green; padding-top: 50px; padding-bottom: 100px;">
+                <div class="col-lg-6 col-md-6">
+                    <div class="login_part_form">
+                        <div class="login_part_form_iner" style="margin-top: 20px; margin-bottom: 20px;">
+                            <div style="text-align: center; margin-bottom: 50px;">
+                                <h2>Billing Information</h2>
+                            </div>
+                            <!-- Payment form start -->
+                            <script src="https://js.stripe.com/v3/"></script>
+                            <form action="{% url 'charge' %}" method="post" id="payment-form" style="text-align: center;">
+                                {% csrf_token %}
+    
+                                <div style="width: 75%; height: 25px;">
+                                    <input id="input" type="hidden" name="amount" value="{{ total }}" readonly>
+                                </div>
+                                <div class="input">
+                                    <input id="input" type="email" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="input">
+                                    <input id="input" type="text" name="name" placeholder="Full Name" required>
+                                </div>
+                                <div class="input">
+                                    <input id="input" type="text" name="address" placeholder="Address" required>
+                                </div>
+    
+                                <div class="form-row" style="margin-bottom: 20px;">
+                                    <label for="card-element">
+                                        
+                                    </label>
+                                    <div id="card-element">
+                                        <!-- A Stripe Element will be inserted here. -->
+                                    </div>
+    
+                                    <!-- Used to display form errors. -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+                                <button id="sb">Submit Payment</button>
+                            </form>
+                            <!-- Payment form end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Create a Stripe client.
+        var stripe = Stripe('pk_test_TQZMbbGAcfMQ8tod0OmQeTds00OMzeXY2d');
+
+        // Create an instance of Elements.
+        var elements = stripe.elements();
+
+        // Custom styling can be passed to options when creating an Element.
+        // (Note that this demo uses a wider set of styles than the guide below.)
+        var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                    color: '#aab7c4'
+                }
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+        };
+
+        // Create an instance of the card Element.
+        var card = elements.create('card', { style: style });
+
+        // Add an instance of the card Element into the `card-element` <div>.
+        card.mount('#card-element');
+
+        // Handle real-time validation errors from the card Element.
+        card.addEventListener('change', function (event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
+        // Handle form submission.
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            stripe.createToken(card).then(function (result) {
+                if (result.error) {
+                    // Inform the user if there was an error.
+                    var errorElement = document.getElementById('card-errors');
+                    errorElement.textContent = result.error.message;
+                } else {
+                    // Send the token to your server.
+                    stripeTokenHandler(result.token);
+                }
+            });
+        });
+
+        // Submit the form with the token ID.
+        function stripeTokenHandler(token) {
+            // Insert the token ID into the form so it gets submitted to the server
+            var form = document.getElementById('payment-form');
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'stripeToken');
+            hiddenInput.setAttribute('value', token.id);
+            form.appendChild(hiddenInput);
+
+            // Submit the form
+            form.submit();
+        }
+    </script>
+
+</body>
+
+</html>
