@@ -58,19 +58,15 @@
     </tr>
     <tr>
         <td>
-            <h4>Billing</h4>
-            <img src="snapchots/billing.png" alt="billing" width="500px" height="350px">
-        </td>
-        <td>
             <h4>Admin Dashboard</h4>
             <img src="snapchots/admin-dashboard.png" alt="admin dashboard" width="500px" height="350px">
         </td>
-    </tr>
-    <tr>
         <td>
             <h4>Admin Create Product</h4>
             <img src="snapchots/admin-product-create.png" alt="admin product create" width="500px" height="350px">
         </td>
+    </tr>
+    <tr>
         <td>
             <h4>Admin - Userlist</h4>
             <img src="snapchots/admin-userlist.png" alt="shop" width="500px" height="350px">
