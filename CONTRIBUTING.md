@@ -5,7 +5,7 @@ In order to report a bug, create a new issue and specify the details of the bug 
 
 ## Pull Requests
 
-##### Main project's quality when contributing
+##### Maintain project's quality when contributing
 
 Please follow the steps below to tell about your contribution.
 
