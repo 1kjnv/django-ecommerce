@@ -36,5 +36,5 @@
 
 <hr />
 
-Feel free to contribute. Contribution guidelines can be found [here](https://github.com/ikjnv/django-ecommerce#contributing)
+Feel free to contribute. Contribution guidelines can be found [here](https://github.com/ikjnv/django-ecommerce/blob/master/CONTRIBUTING.md)
 
