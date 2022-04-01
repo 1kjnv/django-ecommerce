@@ -16,8 +16,41 @@
 
 <hr />
 <div>
+    <h4>Contents</h4>
+    <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#requirements">Requirements to use</a></li>
+        <li><a href="#contribution">Contribution</a></li>
+    </ul>
+</div>
+<hr />
 
-<h4 align="center">Requirements to use!</h4>
+
+<div id="features">
+    <h4>Features</h4>
+    <p>eBazar - a shopping platform built with Django & MySQL with the following features:</p>
+    <ul>
+        <li>cart</li>
+        <li>product search</li>
+        <li>authentication</li>
+        <li>product filtering</li>
+        <li>payment(with Stripe)</li>
+        <li>
+            admin dashboard
+            <ul>
+                <li>product info</li>
+                <li>product creation/deletion</li>
+                <li>order details</li>
+                <li>user info</li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>Note:</strong> you can also see snapchots of the above features in snapchots directory.</p>
+</div>
+<hr />
+
+<div id="requirements">
+<h4>Requirements to use!</h4>
 <ol>
     <li>you need to have Python v3, Django v3 and MySQL installed on your machine</li>
     <li>create MySQL database and name it <strong>"ecommerce"</strong></li>
@@ -35,6 +68,10 @@
 </div>
 
 <hr />
-
-Feel free to contribute. Contribution guidelines can be found [here](https://github.com/ikjnv/django-ecommerce/blob/master/CONTRIBUTING.md)
-
+<div id="contribution">
+    <h4>Contributing</h4>
+    <ul>
+        <li>Provide the detailed explanation of your contribution</li>
+        <li>Create Pull Request</li>
+    </ul>
+</div>
