@@ -10,7 +10,7 @@ mysqlclient==1.4.6
 numpy==1.18.3
 pandas==1.0.3
 Pillow==9.0.0
-protobuf==3.11.4
+protobuf==3.18.3
 PyAutoGUI==0.9.50
 PyGetWindow==0.0.8
 PyMsgBox==1.0.7
